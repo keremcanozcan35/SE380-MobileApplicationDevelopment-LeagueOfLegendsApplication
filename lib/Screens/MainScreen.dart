@@ -85,6 +85,7 @@ class SummonerInput extends StatelessWidget {
       width: this.width * 0.75,
       padding: new EdgeInsets.all(3.0),
       child: new TextField(
+        decoration: new InputDecoration(hintText: "Enter your Summoner Name..."),
         style: new TextStyle(fontSize: 20.0, color: Colors.black),
       ),
     );
