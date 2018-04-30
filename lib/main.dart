@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
       ),
       home: new Scaffold(
           appBar: new AppBar(
-            backgroundColor: Colors.grey[300],
-            title: new Text("League of Legends", style: new TextStyle(fontSize: 25.0,color: Colors.blueGrey[900]), ),
+            backgroundColor: Colors.pink,
+            title: new Text("League of Legends", style: new TextStyle(fontSize: 25.0,color: Colors.white), ),
             actions: <Widget>[
               //TODO Implement an PopupMenuButton... (Erkin)
             ],

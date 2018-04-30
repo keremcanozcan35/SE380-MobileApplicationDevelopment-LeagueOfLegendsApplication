@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riot_application/Screens/HistoryScreen.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -9,6 +10,18 @@ class MainScreen extends StatefulWidget {
 
 class MainScreenState extends State<MainScreen> {
   double width, height;
+  String _summonerName;
+
+   onTextInputChanged(String value){
+    setState((){
+      _summonerName = value;
+      print(_summonerName);
+    });
+  }
+
+  onPressed(){
+    Navigator.push(context, new MaterialPageRoute(builder: (context) => new HistoryScreen(summonerName: _summonerName,)));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +29,20 @@ class MainScreenState extends State<MainScreen> {
     height = MediaQuery.of(context).size.height;
 
     return new Container(
-      color: Colors.pink[900],
+      //color: Colors.blue[900],
+      decoration: new BoxDecoration(color: Colors.blue[900],border: new Border.all(color: Colors.green, width: 10.0)),
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           new SummonerInput(
+            onChanged: this.onTextInputChanged,
             width: this.width,
           ),
           new Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               new Buttons(
+                onPressed: this.onPressed,
                 width: this.width,
                 height: this.height,
                 text: "SUMMARY",
@@ -45,35 +61,38 @@ class MainScreenState extends State<MainScreen> {
 }
 
 class Buttons extends StatelessWidget {
-  Buttons({this.width, this.height, this.text});
+  Buttons({this.width, this.height, this.text, this.summonerName, this.onPressed});
 
   final double width;
   final double height;
   final String text;
+  final String summonerName;
+  final onPressed;
 
   @override
   Widget build(BuildContext context) {
     return new RawMaterialButton(
-      onPressed: null,
+      onPressed: onPressed,
       padding: new EdgeInsets.all(5.0),
-      fillColor: Colors.blueGrey[100],
+      fillColor: Colors.pink,
       shape: new CircleBorder(
-          side: new BorderSide(color: Colors.black, width: 2.0)),
+          side: new BorderSide(color: Colors.green, width: 5.0)),
       constraints: new BoxConstraints(
-          minWidth: this.width * 0.30, minHeight: this.height * 0.20),
+          minWidth: this.width * 0.31, minHeight: this.height * 0.20),
       child: new Text(
         text,
         style: new TextStyle(
-            color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold , fontStyle: FontStyle.normal, letterSpacing: 2.0 ),
+            color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold , fontStyle: FontStyle.italic, letterSpacing: 2.0 ),
       ),
     );
   }
 }
 
 class SummonerInput extends StatelessWidget {
-  SummonerInput({this.width});
+  SummonerInput({this.width, this.onChanged});
 
   final double width;
+  final onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -81,12 +100,13 @@ class SummonerInput extends StatelessWidget {
       decoration: new BoxDecoration(
           color: Colors.white,
           borderRadius: new BorderRadius.all(new Radius.circular(10.0)),
-          border: new Border.all(color: Colors.black, width: 0.90)),
+          border: new Border.all(color: Colors.green, width: 5.0)),
       width: this.width * 0.75,
       padding: new EdgeInsets.all(3.0),
       child: new TextField(
-        decoration: new InputDecoration(hintText: "Enter your Summoner Name..."),
-        style: new TextStyle(fontSize: 20.0, color: Colors.black),
+        onChanged: onChanged,
+        decoration: new InputDecoration(contentPadding: new EdgeInsets.all(5.0),hintText: "Enter your Summoner Name..."),
+        style: new TextStyle(fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
       ),
     );
   }
