@@ -12,7 +12,7 @@ class SummaryScreen extends StatelessWidget {
 }
 
 class Match extends StatelessWidget {
-  Match({this.championName,this.gameResult});
+  Match({this.championName, this.gameResult});
 
   final String championName;
   final bool gameResult;
@@ -27,8 +27,9 @@ class Match extends StatelessWidget {
               width: 120.0,
               height: 120.0,
               image: new NetworkImage(
-                  "https://vignette.wikia.nocookie.net/leagueoflegends/images/c/cc/AatroxSquare.png/revision/latest?cb=20160417012601")),
+                  "https://2.bp.blogspot.com/-iwwrjuwXsQs/UyYHQqhkX3I/AAAAAAAAABo/vi2N63SHw0A/s1600/G%C3%B6r%C3%BCnt%C3%BC_%C4%B0%C5%9Fleme__2013_1_9_15_42_50_807_shutterstock_74744152.jpg")),
           new Container(
+            color: Colors.black,
             padding: new EdgeInsets.only(right: 25.0),
             child: new Row(
               //TODO Find a way to add space between these two containers. Because the ancestor Container doesn't fill the rest it doesn't do spaceBetween. (Erkin)
@@ -36,6 +37,7 @@ class Match extends StatelessWidget {
               children: <Widget>[
                 new Container(
                   padding: new EdgeInsets.all(10.0),
+                  color: Colors.yellow,
                   child: new Text(
                     championName,
                     style: new TextStyle(
@@ -78,7 +80,10 @@ class MatchList extends StatelessWidget {
               //padding: new EdgeInsets.all(60.0),
               child: new Column(
                 children: <Widget>[
-                  new Match(championName: "Ashe", gameResult: true,),
+                  new Match(
+                    championName: "Ashe",
+                    gameResult: true,
+                  ),
                 ],
               ),
             ),
