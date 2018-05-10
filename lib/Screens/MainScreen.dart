@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:riot_application/Screens/HistoryScreen.dart';
+import 'package:riot_application/Screens/SummonerScreen.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -21,6 +22,10 @@ class MainScreenState extends State<MainScreen> {
 
   onPressed(){
     Navigator.push(context, new MaterialPageRoute(builder: (context) => new HistoryScreen(summonerName: _summonerName,)));
+  }
+
+  onPressedSummoner(){
+     Navigator.push(context, new MaterialPageRoute(builder: (context) => new SummonerScreen(summonerName: _summonerName,)));
   }
 
   @override
@@ -50,7 +55,8 @@ class MainScreenState extends State<MainScreen> {
               new Buttons(
                 width: this.width,
                 height: this.height,
-                text: 'LIVE!',
+                text: 'SUMMONER!',
+                onPressed: this.onPressedSummoner,
               )
             ],
           )
