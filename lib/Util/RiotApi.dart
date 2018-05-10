@@ -51,46 +51,46 @@ class RiotApi {
   }
 
 
-//  Future<void> getMatchListByAccountId() async {
-//    var response = await http.get(
-//        Uri.encodeFull(
-//            'https://tr1.api.riotgames.com/lol/match/v3/matchlists/by-account/$accountID?endIndex=5&api_key=$apiKey'),
-//        headers: {"Accept": "application/json"});
-//    matchData = JSON.decode(response.body);
-//    var matches = matchData['matches'];
-//    championIDList = new List();
-//
-//    for (int i = 0; i < 5; i++) {
-//      print(matches[i]["champion"]);
-//      championIDList.add(matches[i]["champion"]);
-//    }
-//  }
+  Future<void> getMatchListByAccountId() async {
+    var response = await http.get(
+        Uri.encodeFull(
+            'https://tr1.api.riotgames.com/lol/match/v3/matchlists/by-account/$accountID?endIndex=5&api_key=$apiKey'),
+        headers: {"Accept": "application/json"});
+    matchData = JSON.decode(response.body);
+    var matches = matchData['matches'];
+    championIDList = new List();
 
-//  Future<void> getStaticChampionData() async {
-//    var response = await http.get(
-//        Uri.encodeFull(
-//            "https://tr1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&dataById=true&api_key=$apiKey"),
-//        headers: {"Accept": "application/json"});
-//    Map temp = JSON.decode(response.body);
-//    //To set the champion informations.
-//    championInformation = temp["data"];
-//    int i = 1;
-//    print(championInformation["$i"]["name"]);
-//  }
+    for (int i = 0; i < 5; i++) {
+      print(matches[i]["champion"]);
+      championIDList.add(matches[i]["champion"]);
+    }
+  }
 
-//  List getTheImageUrlFromLastMatches() {
-//    urlList = new List();
-//    print(championInformation["1"]["name"]);
-//    championInformation.forEach((k, v) {
-//      for (int i = 0; i < 5; i++) {
-//        if (championInformation[k]["id"] == championIDList[i]) {
-//          String champName = championInformation[k]["name"];
-//          urlList.add(
-//              "https://ddragon.leagueoflegends.com/cdn/8.9.1/img/champion/$champName.png");
-//        }
-//      }
-//    });
-//    return urlList;
-//  }
+  Future<void> getStaticChampionData() async {
+    var response = await http.get(
+        Uri.encodeFull(
+            "https://tr1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&dataById=true&api_key=$apiKey"),
+        headers: {"Accept": "application/json"});
+    Map temp = JSON.decode(response.body);
+    //To set the champion informations.
+    championInformation = temp["data"];
+    int i = 1;
+    print(championInformation["$i"]["name"]);
+  }
+
+  List getTheImageUrlFromLastMatches() {
+    urlList = new List();
+    print(championInformation["1"]["name"]);
+    championInformation.forEach((k, v) {
+      for (int i = 0; i < 5; i++) {
+        if (championInformation[k]["id"] == championIDList[i]) {
+          String champName = championInformation[k]["name"];
+          urlList.add(
+              "https://ddragon.leagueoflegends.com/cdn/8.9.1/img/champion/$champName.png");
+        }
+      }
+    });
+    return urlList;
+  }
 
 }

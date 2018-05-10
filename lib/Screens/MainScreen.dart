@@ -55,7 +55,7 @@ class MainScreenState extends State<MainScreen> {
               new Buttons(
                 width: this.width,
                 height: this.height,
-                text: 'SUMMONER!',
+                text: 'SUMMONER',
                 onPressed: this.onPressedSummoner,
               )
             ],
@@ -84,7 +84,7 @@ class Buttons extends StatelessWidget {
       shape: new CircleBorder(
           side: new BorderSide(color: Colors.green, width: 5.0)),
       constraints: new BoxConstraints(
-          minWidth: this.width * 0.31, minHeight: this.height * 0.20),
+          minWidth: this.width * 0.31, minHeight: this.height * 0.23),
       child: new Text(
         text,
         style: new TextStyle(

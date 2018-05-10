@@ -21,22 +21,22 @@ class SummaryScreenState extends State<SummaryScreen> {
   RiotApi riotApi = new RiotApi();
   List urlList;
 
-//  onLoad() async {
-//    await riotApi.getStaticChampionData();
-//    await riotApi.setSummonerData(summonerName);
-//    await riotApi.getMatchListByAccountId();
-//
-//    setState((){
-//      urlList = riotApi.getTheImageUrlFromLastMatches();
-//    });
-//  }
-//
-//  @override
-//  void initState() {
-//    // TODO: implement initState
-//    super.initState();
-//    this.onLoad();
-//  }
+  onLoad() async {
+    await riotApi.getStaticChampionData();
+    await riotApi.setSummonerData(summonerName);
+    await riotApi.getMatchListByAccountId();
+
+    setState((){
+      urlList = riotApi.getTheImageUrlFromLastMatches();
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this.onLoad();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class Match extends StatelessWidget {
           new Image(
               width: 120.0,
               height: 120.0,
-              image: new NetworkImage(imageUrl)),
+              image: new NetworkImage(imageUrl[0])),
           new Container(
             color: Colors.black,
             padding: new EdgeInsets.only(right: 25.0),
@@ -104,37 +104,7 @@ class Match extends StatelessWidget {
   }
 }
 
-class MatchList extends StatelessWidget{
-  MatchList({this.imageUrlList});
-
-  final List imageUrlList;
-
-  @override
-  Widget build(BuildContext context) {
-    return new ListView.builder(
-        itemCount: 5,
-        itemBuilder: (BuildContext context, int index){
-          return new Container(
-            child: new Center(
-              child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  new Card(
-                    child: new Container(
-                      child: new Match(imageUrl: imageUrlList[index],),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          );
-        }
-    );
-  }
-}
-
-//List for the last match.
-//class MatchList extends StatelessWidget {
+//class MatchList extends StatelessWidget{
 //  MatchList({this.imageUrlList});
 //
 //  final List imageUrlList;
@@ -143,27 +113,57 @@ class MatchList extends StatelessWidget{
 //  Widget build(BuildContext context) {
 //    return new ListView.builder(
 //        itemCount: 5,
-//        itemBuilder: (BuildContext context, int index) {
-//          return new Card(
-//            child: new Container(
-//              decoration: new BoxDecoration(
-//                  color: Colors.white,
-//                  border: new Border.all(color: Colors.black, width: 5.0)),
-//              //padding: new EdgeInsets.all(60.0),
+//        itemBuilder: (BuildContext context, int index){
+//          return new Container(
+//            child: new Center(
 //              child: new Column(
+//                crossAxisAlignment: CrossAxisAlignment.stretch,
 //                children: <Widget>[
-//                  new Match(
-//                    championName: "Ashe",
-//                    gameResult: true,
-//                    imageUrl: imageUrlList[index],
-//                  ),
+//                  new Card(
+//                    child: new Container(
+//                      child: new Match(imageUrl: imageUrlList[index],),
+//                    ),
+//                  )
 //                ],
 //              ),
 //            ),
 //          );
-//        });
+//        }
+//    );
 //  }
 //}
+
+//List for the last match.
+class MatchList extends StatelessWidget {
+  MatchList({this.imageUrlList});
+
+  final List imageUrlList;
+
+  @override
+  Widget build(BuildContext context) {
+    return new ListView.builder(
+        itemCount: 5,
+        itemBuilder: (BuildContext context, int index) {
+          return new Card(
+            child: new Container(
+              decoration: new BoxDecoration(
+                  color: Colors.white,
+                  border: new Border.all(color: Colors.black, width: 5.0)),
+              //padding: new EdgeInsets.all(60.0),
+              child: new Column(
+                children: <Widget>[
+                  new Match(
+                    championName: "Ashe",
+                    gameResult: true,
+                    imageUrl: imageUrlList,
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+}
 
 class HistoryScreen extends StatelessWidget {
   HistoryScreen({this.summonerName});
