@@ -13,11 +13,12 @@ class RiotApi {
   List urlList;
   Map championInformation;
 
-  String apiKey = "RGAPI-76b9571a-8089-4b49-98a1-a2be0285436b";
+  String apiKey = "RGAPI-50b38e72-0bc7-4bd5-8373-1faead3e6c8b";
 
   //Constructor (Template)
   RiotApi() {
     print("RiotAPI object is instantiating...");
+    getStaticChampionData();
   }
 
   //List data;
@@ -69,7 +70,7 @@ class RiotApi {
   Future<void> getStaticChampionData() async {
     var response = await http.get(
         Uri.encodeFull(
-            "https://tr1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&dataById=true&api_key=$apiKey"),
+            "https://tr1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=image&dataById=true&api_key=$apiKey"),
         headers: {"Accept": "application/json"});
     Map temp = JSON.decode(response.body);
     //To set the champion informations.
@@ -84,9 +85,10 @@ class RiotApi {
     championInformation.forEach((k, v) {
       for (int i = 0; i < 5; i++) {
         if (championInformation[k]["id"] == championIDList[i]) {
-          String champName = championInformation[k]["name"];
+          Map temp = championInformation[k]["image"];
+          String champImage = temp["full"];
           urlList.add(
-              "https://ddragon.leagueoflegends.com/cdn/8.9.1/img/champion/$champName.png");
+              "https://ddragon.leagueoflegends.com/cdn/8.9.1/img/champion/$champImage");
         }
       }
     });
