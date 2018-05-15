@@ -13,7 +13,7 @@ class RiotApi {
   List urlList;
   Map championInformation;
 
-  String apiKey = "RGAPI-50b38e72-0bc7-4bd5-8373-1faead3e6c8b";
+  String apiKey = "RGAPI-c478760e-92b4-4017-b9fe-3c095def6302";
 
   //Constructor (Template)
   RiotApi() {
