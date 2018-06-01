@@ -13,7 +13,7 @@ class RiotApi {
   List urlList;
   Map championInformation;
 
-  String apiKey = "RGAPI-c478760e-92b4-4017-b9fe-3c095def6302";
+  String apiKey = "RGAPI-9abd9724-0444-4ece-aaba-ea35e4e8855f";
 
   //Constructor (Template)
   RiotApi() {
@@ -87,8 +87,11 @@ class RiotApi {
         if (championInformation[k]["id"] == championIDList[i]) {
           Map temp = championInformation[k]["image"];
           String champImage = temp["full"];
-          urlList.add(
               "https://ddragon.leagueoflegends.com/cdn/8.9.1/img/champion/$champImage");
+          champImage = champImage.substring(0,champImage.length - 4);
+//          urlList.add(
+//              "https://ddragon.leagueoflegends.com/cdn/8.9.1/img/champion/$champImage");
+        urlList.add(champImage);
         }
       }
     });

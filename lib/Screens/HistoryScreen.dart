@@ -23,10 +23,6 @@ class SummaryScreenState extends State<SummaryScreen> {
   List urlList;
 
   onLoad() async {
-//    await riotApi.getStaticChampionData();
-//    await riotApi.setSummonerData(summonerName);
-//    await riotApi.getMatchListByAccountId();
-
     setState(() {
       urlList = riotApi.getTheImageUrlFromLastMatches();
     });
@@ -62,40 +58,42 @@ class Match extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
       child: new Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           new Image(
               width: 120.0,
               height: 120.0,
-              image: new NetworkImage(imageUrl)),
+              image: new NetworkImage("https://ddragon.leagueoflegends.com/cdn/8.9.1/img/champion/$imageUrl.png")),
           new Container(
-            color: Colors.black,
-            padding: new EdgeInsets.only(right: 25.0),
+            //padding: new EdgeInsets.only(right: 25.0),
+            color: Colors.yellow,
             child: new Row(
               //TODO Find a way to add space between these two containers. Because the ancestor Container doesn't fill the rest it doesn't do spaceBetween. (Erkin)
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                new Container(
-                  padding: new EdgeInsets.all(10.0),
-                  color: Colors.yellow,
-                  child: new Text(
-                    championName,
-                    style: new TextStyle(
-                        color: Colors.black,
-                        fontSize: 21.0,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                new Container(
-                  decoration: new BoxDecoration(
-                      color: Colors.lightBlueAccent[700],
-                      border:
-                          new Border.all(color: Colors.lime[900], width: 1.0)),
-                  child: new Text(
-                    gameResult ? "VICTORY" : "DEFEAT",
-                    style: new TextStyle(color: Colors.white, fontSize: 40.0),
-                  ),
-                ),
+                new Text(imageUrl),
+                new Text("Victory"),
+//                new Container(
+//                  padding: new EdgeInsets.all(5.0),
+//                  color: Colors.yellow,
+//                  child: new Text(
+//                    championName,
+//                    style: new TextStyle(
+//                        color: Colors.black,
+//                        fontSize: 15.0,
+//                        fontWeight: FontWeight.bold),
+//                  ),
+//                ),
+//                new Container(
+//                  decoration: new BoxDecoration(
+//                      color: Colors.lightBlueAccent[700],
+//                      border:
+//                          new Border.all(color: Colors.lime[900], width: 1.0)),
+//                  child: new Text(
+//                    gameResult ? "VICTORY" : "DEFEAT",
+//                    style: new TextStyle(color: Colors.white, fontSize: 15.0),
+//                  ),
+//                ),
               ],
             ),
           )
@@ -126,7 +124,7 @@ class MatchList extends StatelessWidget {
               child: new Column(
                 children: <Widget>[
                   new Match(
-                    championName: "Ashe",
+                    championName: imageUrlList[index],
                     gameResult: true,
                     imageUrl: imageUrlList[index],
                   ),

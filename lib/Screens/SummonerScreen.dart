@@ -121,7 +121,7 @@ class SummonerState extends State<Summoner> {
                   style: new TextStyle(color: Colors.green[400], fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
                 new Text(
-                  'Loose: $loseNumberText',
+                  'Lose: $loseNumberText',
                   style: new TextStyle(color: Colors.red, fontSize: 20.0, fontWeight: FontWeight.bold),
                 )
               ],
