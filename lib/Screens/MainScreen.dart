@@ -26,6 +26,7 @@ class MainScreenState extends State<MainScreen> {
   onPressed() async {
     await riotApi.setSummonerData(_summonerName);
     await riotApi.getMatchListByAccountId();
+    await riotApi.getDetailedMatchData();
     showDialog(
       context: context,
       barrierDismissible: false,
