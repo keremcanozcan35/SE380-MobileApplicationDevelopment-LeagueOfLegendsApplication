@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:riot_application/Util/RiotApi.dart';
+import 'package:decimal/decimal.dart';
 
 class SummaryScreen extends StatefulWidget {
   SummaryScreen({this.summonerName, this.riotApi});
@@ -79,9 +80,13 @@ class Match extends StatelessWidget {
                     style: new TextStyle(fontSize: 20.0),
                   ),
                   new Text(
-                    "Number of kills" + matchData["kill"],
+                    matchData["kills"] + "/" + matchData["deaths"] + "/" + matchData["assists"],
                     style: new TextStyle(fontSize: 20.0),
                   ),
+                  new Text(
+                    "KDA : " + matchData["kda"],
+                    style: new TextStyle(fontSize: 20.0),
+                  )
                 ],
               )))
             ],

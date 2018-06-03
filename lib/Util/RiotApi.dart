@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+
 class RiotApi {
   Map summonerData;
   Map matchData;
@@ -123,11 +124,17 @@ class RiotApi {
       bool gameResult = participantStatsDto["win"];
       int numberOfKills = participantStatsDto["kills"];
       int numberOfDeaths = participantStatsDto["deaths"];
+      int numberOfAssists = participantStatsDto["assists"];
+      double kda = ((numberOfKills + numberOfAssists) / numberOfDeaths).toDouble();
+      String kdaString = kda.toStringAsFixed(3);
 
-      matchDataForUi = {"kill" : "$numberOfKills",
+
+      matchDataForUi = {"kills" : "$numberOfKills",
         "deaths" : "$numberOfDeaths",
+        "assists" : "$numberOfAssists",
         "gameResult" : gameResult,
-        "championName" : champName
+        "championName" : champName,
+        "kda" : kdaString
       };
 
       matchDataListForUi.add(matchDataForUi);
