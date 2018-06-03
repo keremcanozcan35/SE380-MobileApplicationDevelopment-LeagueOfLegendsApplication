@@ -20,12 +20,10 @@ class SummaryScreenState extends State<SummaryScreen> {
 
   String summonerName;
   RiotApi riotApi;
-  List urlList;
   List testMatchData;
 
   onLoad() async {
     setState(() {
-      urlList = riotApi.getTheImageUrlFromLastMatches();
       testMatchData = riotApi.matchDataListForUi;
     });
   }
@@ -43,7 +41,6 @@ class SummaryScreenState extends State<SummaryScreen> {
       color: Colors.pink,
       //TODO IF I WANT TO WRAP THE MATCHLIST IT GIVES AN ERROR.
       child: new MatchList(
-        imageUrlList: urlList,
         testMatchData: testMatchData,
       ),
     );
@@ -51,12 +48,8 @@ class SummaryScreenState extends State<SummaryScreen> {
 }
 
 class Match extends StatelessWidget {
-  Match(
-      {this.championName, this.gameResult, this.imageUrl, this.matchData});
+  Match({this.matchData});
 
-  final String imageUrl;
-  final String championName;
-  final bool gameResult;
   final Map matchData;
 
   @override
@@ -72,13 +65,13 @@ class Match extends StatelessWidget {
                   width: 120.0,
                   height: 120.0,
                   image: new NetworkImage(
-                      "https://ddragon.leagueoflegends.com/cdn/8.9.1/img/champion/$imageUrl.png")),
+                      "https://ddragon.leagueoflegends.com/cdn/8.9.1/img/champion/"+matchData["championName"]+".png")),
               new Container(
                   child: new Center(
                       child: new Column(
                 children: <Widget>[
                   new Text(
-                    championName,
+                    matchData["championName"],
                     style: new TextStyle(fontSize: 20.0),
                   ),
                   new Text(
@@ -134,9 +127,9 @@ class Match extends StatelessWidget {
 
 //List for the last match.
 class MatchList extends StatelessWidget {
-  MatchList({this.imageUrlList, this.testMatchData});
+  MatchList({ this.testMatchData});
 
-  final List imageUrlList;
+
   final List testMatchData;
 
   @override
@@ -145,10 +138,7 @@ class MatchList extends StatelessWidget {
         itemCount: 10,
         itemBuilder: (context, int index) {
           return new Match(
-            imageUrl: imageUrlList[index],
-            championName: imageUrlList[index],
             matchData:  testMatchData[index],
-            gameResult: true,
           );
         });
   }

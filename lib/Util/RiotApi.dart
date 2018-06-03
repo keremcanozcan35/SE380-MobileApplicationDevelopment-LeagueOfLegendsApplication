@@ -10,6 +10,7 @@ class RiotApi {
   var matches;
   List matchDataListForUi;
   List numberOfKillsPerMatch;
+  String globalChampName;
 
   Map matchDataForUi;
 
@@ -18,7 +19,7 @@ class RiotApi {
   List urlList;
   Map championInformation;
 
-  String apiKey = "RGAPI-9abd9724-0444-4ece-aaba-ea35e4e8855f";
+  String apiKey = "RGAPI-cd3ed7f7-f45f-4d97-8cf5-3d1bd9bbd70d";
 
   //Constructor (Template)
   RiotApi() {
@@ -84,22 +85,17 @@ class RiotApi {
     print(championInformation["$i"]["name"]);
   }
 
-  List getTheImageUrlFromLastMatches() {
-    urlList = new List();
-    print(championInformation["1"]["name"]);
-    championInformation.forEach((k, v) {
-      for (int i = 0; i < 10; i++) {
-        if (championInformation[k]["id"] == championIDList[i]) {
+
+
+  void getTheChampNameFromMatch(int championId){
+    championInformation.forEach((k,v){
+        if(championInformation[k]["id"] == championId){
           Map temp = championInformation[k]["image"];
-          String champImage = temp["full"];
-          champImage = champImage.substring(0, champImage.length - 4);
-//          urlList.add(
-//              "https://ddragon.leagueoflegends.com/cdn/8.9.1/img/champion/$champImage");
-          urlList.add(champImage);
+          String champName = temp["full"];
+          champName = champName.substring(0, champName.length - 4);
+          globalChampName = champName;
         }
-      }
     });
-    return urlList;
   }
 
   //This is a function to get the match id's of the last 10 games and get the data inside of them by using MATCh API from Riot... The api response has huge raw data, so we eliminate many of them...
@@ -116,19 +112,22 @@ class RiotApi {
         Map playerDto = participantIdentities[i]["player"];
         if(playerDto["summonerId"] == summonerData["id"]){
           participantId = participantIdentities[i]["participantId"];
-
+          participantId--;
         }
       }
       List participants = rawMatchData["participants"];
       Map participantStatsDto = participants[participantId]["stats"];
 
+      getTheChampNameFromMatch(participants[participantId]["championId"]);
+      String champName = globalChampName;
       bool gameResult = participantStatsDto["win"];
       int numberOfKills = participantStatsDto["kills"];
       int numberOfDeaths = participantStatsDto["deaths"];
 
       matchDataForUi = {"kill" : "$numberOfKills",
         "deaths" : "$numberOfDeaths",
-        "gameResult" : gameResult
+        "gameResult" : gameResult,
+        "championName" : champName
       };
 
       matchDataListForUi.add(matchDataForUi);
