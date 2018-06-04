@@ -66,7 +66,7 @@ class Match extends StatelessWidget {
                   width: 120.0,
                   height: 120.0,
                   image: new NetworkImage(
-                      "https://ddragon.leagueoflegends.com/cdn/8.9.1/img/champion/"+matchData["championName"]+".png")),
+                      "https://ddragon.leagueoflegends.com/cdn/8.11.1/img/champion/"+matchData["championName"]+".png")),
               new Container(
                   child: new Center(
                       child: new Column(
@@ -93,39 +93,6 @@ class Match extends StatelessWidget {
           ),
         ),
       ),
-//          new Container(
-//            //padding: new EdgeInsets.only(right: 25.0),
-//            color: Colors.yellow,
-//            child: new Row(
-//              //TODO Find a way to add space between these two containers. Because the ancestor Container doesn't fill the rest it doesn't do spaceBetween. (Erkin)
-//              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//              children: <Widget>[
-//                new Text(imageUrl),
-//                new Text("Victory"),
-////                new Container(
-////                  padding: new EdgeInsets.all(5.0),
-////                  color: Colors.yellow,
-////                  child: new Text(
-////                    championName,
-////                    style: new TextStyle(
-////                        color: Colors.black,
-////                        fontSize: 15.0,
-////                        fontWeight: FontWeight.bold),
-////                  ),
-////                ),
-////                new Container(
-////                  decoration: new BoxDecoration(
-////                      color: Colors.lightBlueAccent[700],
-////                      border:
-////                          new Border.all(color: Colors.lime[900], width: 1.0)),
-////                  child: new Text(
-////                    gameResult ? "VICTORY" : "DEFEAT",
-////                    style: new TextStyle(color: Colors.white, fontSize: 15.0),
-////                  ),
-////                ),
-//              ],
-//            ),
-//          )
     );
   }
 }

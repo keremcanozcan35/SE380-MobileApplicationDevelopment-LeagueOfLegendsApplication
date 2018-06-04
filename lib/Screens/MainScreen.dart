@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:riot_application/Screens/HistoryScreen.dart';
 import 'package:riot_application/Screens/SummonerScreen.dart';
 import 'package:riot_application/Util/RiotApi.dart';
+import 'package:riot_application/Screens/MatchUpScreen.dart';
 import 'dart:async';
 
 class MainScreen extends StatefulWidget {
@@ -40,7 +41,7 @@ class MainScreenState extends State<MainScreen> {
         ),
       ),
     );
-    new Future.delayed(new Duration(seconds: 3), () {
+    new Future.delayed(new Duration(seconds: 1), () {
       Navigator.pop(context); //pop dialog
       Navigator.push(
           context,
@@ -76,6 +77,34 @@ class MainScreenState extends State<MainScreen> {
     });
   }
 
+  onPressedMatchUp() async{
+    await riotApi.setSummonerData(_summonerName);
+    await riotApi.getMatchListByAccountId();
+    await riotApi.getDetailedMatchData();
+    await riotApi.getDataFromGG();
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      child: new Dialog(
+        child: new Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            new CircularProgressIndicator(),
+            new Text("Loading"),
+          ],
+        ),
+      ),
+    );
+    new Future.delayed(new Duration(seconds: 1), () {
+      Navigator.pop(context); //pop dialog
+      Navigator.push(
+          context,
+          new MaterialPageRoute(
+              builder: (context) => new MatchUpScreen(
+                  summonerName: _summonerName, riotApi: riotApi)));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;
@@ -106,6 +135,12 @@ class MainScreenState extends State<MainScreen> {
                 height: this.height,
                 text: 'SUMMONER',
                 onPressed: this.onPressedSummoner,
+              ),
+              new Buttons(
+                width: this.width,
+                height: this.height,
+                text: 'MATCH UP',
+                onPressed: this.onPressedMatchUp,
               )
             ],
           )
